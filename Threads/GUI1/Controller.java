@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 
 public class Controller {
 	
-	
-	
+	public void pressPlay_Controller(Model m) {
+		m.NameBtnPlay("Loading the game..");
+	}
+	public void pressSettings_Controller(Model m) { m.NameBtnSettings("Settings processing.."); }
+	public void pressExit_Controller(Model m) { m.NameBtnExit("Exit the game.."); }
 }

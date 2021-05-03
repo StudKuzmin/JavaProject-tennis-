@@ -4,12 +4,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.image.*;
 import javafx.scene.Scene;
 
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 
 
 public class Main extends Application {
@@ -28,19 +34,22 @@ public class Main extends Application {
 		stage.setWidth(500);
 		stage.centerOnScreen();
 		
-		Button play = new Button("Play!");			// To Do Значок геймпада
-		play.setPrefSize(300, 80);
-		Button settings = new Button("Settings"); 	// To Do значок настройки
-		settings.setPrefSize(300, 80);
-		Button exit = new Button("Exit"); 			// To Do значок выхода
-		exit.setPrefSize(300, 80);
+		// stage.setFullScreen(true);
+		// stage.setFullScreenExitHint("");
+		// stage.initStyle(StageStyle.TRANSPARENT);
+		// stage.initStyle(StageStyle.UNDECORATED);
 		
-		FlowPane root = new FlowPane(Orientation.VERTICAL, 10, 10, play, settings, exit);
-		root.setAlignment(Pos.CENTER);
+		MainScene ms = new MainScene();
+		View v = new View(ms, stage);
 		
-		Scene scene = new Scene(root);
+		v.pressPlay();
+		v.pressSettings();
+		v.pressExit();
 		
-		stage.setScene(scene);
+		
+		
+		
+		stage.setScene(ms.getScene());
 		stage.show();
 	}
 }
