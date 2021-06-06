@@ -39,13 +39,13 @@ public class View extends Controller {
 	private BackgroundImage background_image;
 	private Background background;
 	
-	// private Rectangle rec;
+	private Rectangle rec;
 	private double oldX, oldY;
 	MainScene ms;
 	Stage stage;
 	
 	public View(){}
-	public View(MainScene ms, Stage stage, Rectangle rec){
+	public View(MainScene ms, Stage stage){
 		m = new Model();
 		this.ms = ms;
 		this.stage = stage;
@@ -89,33 +89,32 @@ public class View extends Controller {
 		background = new Background(background_image);
 		
 		
-		// rec = new Rectangle(100, 150);
+		rec = new Rectangle(100, 150);
 		
-		ms.init(this, rec);
+		ms.init(this);
 		
 	}
 	public void start() {
 		pressPlay();
 		pressSettings();
 		pressExit();
-		// actionRec();
+		actionRec();
 	}
 	private void pressBack() {
 		back.setOnAction(event -> {
 			stage.getScene().setRoot(ms.getMainRoot());
 		});
 	}
-	// private void actionRec() {
-		// rec.setOnMousePressed(e -> {
-			// oldX = rec.getTranslateX()-e.getSceneX();
-			// oldY = rec.getTranslateY()-e.getSceneY();
-		// });
-		// rec.setOnMouseDragged(e -> {
-			// System.out.println("Rec X\t" + rec.getLayoutX());
-			// rec.setTranslateX(oldX+e.getSceneX());
-			// rec.setTranslateY(oldY+e.getSceneY());
-		// }); 
-	// }
+	private void actionRec() {
+		rec.setOnMousePressed(e -> {
+			oldX = rec.getTranslateX()-e.getSceneX();
+			oldY = rec.getTranslateY()-e.getSceneY();
+		});
+		rec.setOnMouseDragged(e -> {
+			rec.setTranslateX(oldX+e.getSceneX());
+			rec.setTranslateY(oldY+e.getSceneY());
+		}); 
+	}
 	
 	private void pressPlay(){
 		pressPlay_Controller(m);
@@ -157,9 +156,9 @@ public class View extends Controller {
 		return back;
 	}
 	
-	// public Rectangle getRectangle(){
-		// return rec;
-	// }
+	public Rectangle getRectangle(){
+		return rec;
+	}
 	
 	public Background getBackground(){
 		return background;

@@ -6,10 +6,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.image.*;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.geometry.Bounds;
+
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Circle;
 
 import javafx.stage.Stage;
 
@@ -39,14 +43,24 @@ public class View extends Controller {
 	private BackgroundImage background_image;
 	private Background background;
 	
-	// private Rectangle rec;
+	private Rectangle rec;
+	private Circle cir;
+	
+	Bounds bounds;
+	private Bounds bounds2;
+	
+	
 	private double oldX, oldY;
 	MainScene ms;
 	Stage stage;
 	
 	public View(){}
-	public View(MainScene ms, Stage stage, Rectangle rec){
-		m = new Model();
+	public View(MainScene ms, Stage stage){
+		rec = new Rectangle(100, 150);
+		cir = new Circle();
+		cir = new Circle(15, Color.BLUE);
+		cir.relocate(100, 100);
+		
 		this.ms = ms;
 		this.stage = stage;
 		
@@ -89,33 +103,35 @@ public class View extends Controller {
 		background = new Background(background_image);
 		
 		
-		// rec = new Rectangle(100, 150);
 		
-		ms.init(this, rec);
+		ms.init(this);
+		bounds = ms.getPlayRoot().getBoundsInLocal();
+		bounds2 = rec.getBoundsInLocal();
+		m = new Model(rec, cir, bounds, bounds2);
 		
 	}
 	public void start() {
 		pressPlay();
 		pressSettings();
 		pressExit();
-		// actionRec();
+		actionRec();
 	}
 	private void pressBack() {
 		back.setOnAction(event -> {
 			stage.getScene().setRoot(ms.getMainRoot());
 		});
 	}
-	// private void actionRec() {
-		// rec.setOnMousePressed(e -> {
-			// oldX = rec.getTranslateX()-e.getSceneX();
-			// oldY = rec.getTranslateY()-e.getSceneY();
-		// });
-		// rec.setOnMouseDragged(e -> {
-			// System.out.println("Rec X\t" + rec.getLayoutX());
-			// rec.setTranslateX(oldX+e.getSceneX());
-			// rec.setTranslateY(oldY+e.getSceneY());
-		// }); 
-	// }
+	private void actionRec() {
+		rec.setOnMousePressed(e -> {
+			oldX = rec.getTranslateX()-e.getSceneX();
+			oldY = rec.getTranslateY()-e.getSceneY();
+		});
+		rec.setOnMouseDragged(e -> {
+			System.out.println("Rec X\t" + rec.getLayoutX());
+			rec.setTranslateX(oldX+e.getSceneX());
+			rec.setTranslateY(oldY+e.getSceneY());
+		}); 
+	}
 	
 	private void pressPlay(){
 		pressPlay_Controller(m);
@@ -157,9 +173,9 @@ public class View extends Controller {
 		return back;
 	}
 	
-	// public Rectangle getRectangle(){
-		// return rec;
-	// }
+	public Rectangle getRectangle(){
+		return rec;
+	}
 	
 	public Background getBackground(){
 		return background;
