@@ -4,9 +4,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.Scene;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.Color;
 
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+
 
 
 
@@ -47,6 +49,7 @@ public class MainScene {
 	}
 	public void setRec() {
 		rec[i] = new Rectangle(100, 200);
+		rec[i].setFill(Color.RED);
 		playRoot.getChildren().add(rec[i]);
 		playerID[i++] = counterID++;
 	}

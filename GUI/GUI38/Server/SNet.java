@@ -41,7 +41,7 @@ public class SNet extends Application
         Scene scene = new Scene(root, 800, 600);
 
 
-		//stage.setMaximized(true);
+		// stage.setMaximized(true);
         stage.setTitle("Server");
         stage.setScene(scene);
 		
@@ -240,13 +240,14 @@ class Thread_snet extends Thread {
 				ab.setKey(true);
 				s[i] = new Server(clientConnection, ab, playerID);
 				for (int j = 0; j <= i; j++) {
-					s[j].setCountPlayers(countPlayers++);
+					s[j].setCountPlayers(countPlayers);
 				}
 				s[i].start();
 				cr.addS(s[i]);
-				cr.setKey(true);
+			if (countPlayers >= 2) { cr.setKey(true); }
 				playerID++;
 				i++;
+				countPlayers++;
 		}
 		catch(Exception e){
 				e.printStackTrace();
@@ -261,11 +262,13 @@ class CoordXY extends Thread {
 	Server[] s = new Server[4];
 	int i = 0;
 	boolean key = false;
+	int countPlayers = 0;
 	
 	@Override
 	public void run() {
-		while(key == false) { System.out.println(); }
+		while(key == false ) { System.out.println("DA"); }
 		while (true) {
+			System.out.println("TYYYYYYYYYYYYYYYYYYYYYYYYYT");
 			s[0].setOtherXY(s[1].getRecX(), s[1].getRecY());
 			s[1].setOtherXY(s[0].getRecX(), s[0].getRecY());
 		}
@@ -283,6 +286,7 @@ class CoordXY extends Thread {
 	// }
 	
 	public void addS(Server s) {
+		System.out.println("TYYYYYYYYYT_________________");
 		this.s[i++] = s;
 	}
 	
@@ -290,7 +294,6 @@ class CoordXY extends Thread {
 		this.key = key;
 	}
 }
-
 
 class Server extends Thread
 {
