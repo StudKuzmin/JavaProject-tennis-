@@ -33,10 +33,10 @@ public class Main extends Application {
 		stage.setWidth(500);
 		stage.centerOnScreen();
 		
-		// stage.setFullScreen(true);
-		// stage.setFullScreenExitHint("");
-		// stage.initStyle(StageStyle.TRANSPARENT);
-		// stage.initStyle(StageStyle.UNDECORATED);
+		stage.setFullScreen(true);
+		stage.setFullScreenExitHint("");
+		stage.initStyle(StageStyle.TRANSPARENT);
+		stage.initStyle(StageStyle.UNDECORATED);
 		
 		MainScene ms = new MainScene();
 		View v = new View(ms, stage);
